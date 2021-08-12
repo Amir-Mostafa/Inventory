@@ -26,9 +26,7 @@ namespace repo.Entity
 
         public virtual ICollection<Orders> Orders { get; set; }
 
-       public virtual ICollection<ShokakOperation> ShokakOperations { get; set; }
-
-        public virtual ICollection<Operations> Operations { get; set; }
+        public virtual ICollection<ShokakOperation> ShokakOperations { get; set; }
 
     }
 }

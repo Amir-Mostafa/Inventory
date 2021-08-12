@@ -1,6 +1,6 @@
 ﻿using authontecation.Authontecation;
 using authontecation.helper;
-using authontecation.interfces;
+
 using authontecation.Models;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Identity;

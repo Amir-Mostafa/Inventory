@@ -1,5 +1,4 @@
 using authontecation.Authontecation;
-using authontecation.interfces;
 using authontecation.Models;
 
 using Microsoft.AspNetCore.Authentication.JwtBearer;
@@ -16,13 +15,15 @@ using Microsoft.Extensions.Hosting;
 using Microsoft.Extensions.Logging;
 using Microsoft.IdentityModel.Tokens;
 using Microsoft.OpenApi.Models;
+using repo.interfces;
+using repo.Mapper;
+using repo.Repo;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Net;
 using System.Text;
 using System.Threading.Tasks;
-
 namespace authontecation
 {
     public class Startup
@@ -80,6 +81,12 @@ namespace authontecation
             //mail
             //services.Configure<MailSettings>(Configuration.GetSection("MailSettings"));
             //services.AddTransient<IMailService, MailServiceRepo>();
+
+            //automapper
+            services.AddAutoMapper(x => x.AddProfile(new DomainProfile()));
+
+
+            services.AddScoped<IClientRepo, ClientRepo>();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.

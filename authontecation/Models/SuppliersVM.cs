@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace repo.Models
 {
-    public class Suppliers
+    public class SuppliersVM
     {
 
         [Key]

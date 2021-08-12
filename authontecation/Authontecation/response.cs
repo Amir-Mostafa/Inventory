@@ -10,5 +10,6 @@ namespace authontecation.Authontecation
         public string Message { get; set; }
         public string Status { get; set; }
         
-    }
+        public List<string> Errors { get; set; }
+}
 }
