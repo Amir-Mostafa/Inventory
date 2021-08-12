@@ -70,8 +70,8 @@ namespace authontecation
                 options.RequireHttpsMetadata = false;
                 options.TokenValidationParameters = new TokenValidationParameters()
                 {
-                    ValidateIssuer = true,
-                    ValidateAudience = true,
+                    ValidateIssuer = false,
+                    ValidateAudience = false,
                     ValidAudience = Configuration["JWT:ValidAudience"],
                     ValidIssuer = Configuration["JWT:ValidIssuer"],
                     IssuerSigningKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(Configuration["JWT:Secret"]))
@@ -87,6 +87,7 @@ namespace authontecation
 
 
             services.AddScoped<IClientRepo, ClientRepo>();
+            services.AddScoped<ICityRepo, CityRepo>();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
@@ -103,6 +104,7 @@ namespace authontecation
 
             app.UseRouting();
             app.UseAuthentication();
+            app.UseAuthorization();
 
             app.Use(async (context, next) =>
             {
@@ -113,7 +115,7 @@ namespace authontecation
                     await context.Response.WriteAsync("Token Validation Has Failed. Request Access Denied");
                 }
             });
-            app.UseAuthorization();
+            
 
             app.UseEndpoints(endpoints =>
             {

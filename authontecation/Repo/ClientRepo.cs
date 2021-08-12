@@ -41,7 +41,7 @@ namespace repo.Repo
             {
                 return null;
             }
-            
+
         }
 
         public ClientVM Edit(ClientVM ob)
@@ -74,7 +74,7 @@ namespace repo.Repo
 
         public IQueryable<ClientVM> Search(string name)
         {
-            var data = db.Client.Where(n=>n.Name.Contains(name)).Select(n => new ClientVM { Id = n.Id, CityId = n.CityId, CityName = n.City.Name, Name = n.Name, Notes = n.Notes });
+            var data = db.Client.Where(n => n.Name.Contains(name)).Select(n => new ClientVM { Id = n.Id, CityId = n.CityId, CityName = n.City.Name, Name = n.Name, Notes = n.Notes });
             return data;
         }
     }
