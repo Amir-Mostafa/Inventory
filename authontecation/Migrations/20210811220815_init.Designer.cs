@@ -10,7 +10,7 @@ using authontecation.Authontecation;
 namespace repo.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    [Migration("20210811194304_init")]
+    [Migration("20210811220815_init")]
     partial class init
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)

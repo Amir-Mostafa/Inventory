@@ -30,8 +30,6 @@ namespace repo.Entity
 
         //[ForeignKey("OrderId")]
         //public virtual Orders Orders { get; set; }
-
-
         public int ClientId { get; set; }
 
         [ForeignKey("ClientId")]
