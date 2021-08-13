@@ -13,7 +13,8 @@ namespace repo.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]
-    
+    [Authorize]
+
     public class CityController : ControllerBase
     {
 
@@ -23,7 +24,7 @@ namespace repo.Controllers
             CityRepo = city;
         }
 
-        [HttpPost("Create")]
+        [HttpPost]
         public IActionResult Create(CityVM client)
         {
             if (ModelState.IsValid)
@@ -51,7 +52,8 @@ namespace repo.Controllers
             return BadRequest(data);
         }
 
-        [HttpGet("GetAll")]
+        [HttpGet]
+
         
         public IActionResult Get()
         {
@@ -59,7 +61,7 @@ namespace repo.Controllers
             return Ok(data);
         }
 
-        [HttpPost("Delete")]
+        [HttpDelete]
         public IActionResult Delete(CityVM ob)
         {
             var data = CityRepo.Delete(ob);
@@ -67,7 +69,7 @@ namespace repo.Controllers
                 return BadRequest(new response { Message = "Can Not Delete", Status = "Error" });
             return Ok(data);
         }
-        [HttpPost("Edit")]
+        [HttpPut]
         public IActionResult Edit(CityVM ob)
         {
             var data = CityRepo.Edit(ob);
@@ -75,12 +77,12 @@ namespace repo.Controllers
                 return BadRequest(new response { Message = "Can Not Edit", Status = "Error" });
             return Ok(data);
         }
-        [HttpPost("GetById")]
+        [HttpGet("{id}")]
         public IActionResult GetById(int id)
         {
             return Ok(CityRepo.GetById(id));
         }
-        [HttpPost("Search")]
+        [HttpPost("{name}")]
         public IActionResult Search(string name)
         {
             return Ok(CityRepo.Search(name));

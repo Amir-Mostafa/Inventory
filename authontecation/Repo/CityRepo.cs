@@ -59,7 +59,7 @@ namespace repo.Repo
             }
         }
 
-        [Authorize]
+        
         public IQueryable<CityVM> GetAll()
         {
             List<City> all = db.City.ToList();

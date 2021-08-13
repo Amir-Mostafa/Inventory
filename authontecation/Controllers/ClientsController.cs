@@ -8,12 +8,11 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
-
 namespace repo.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]
-    
+    [Authorize]
     
     public class ClientsController : ControllerBase
     {
@@ -23,7 +22,7 @@ namespace repo.Controllers
             ClientRepo = client;
         }
 
-        [HttpPost("Create")]
+        [HttpPost]
         public IActionResult Create(ClientVM client)
         {
             if(ModelState.IsValid)
@@ -51,15 +50,14 @@ namespace repo.Controllers
             return BadRequest(data);
         }
 
-        [HttpGet("GetAll")]
-        
+        [HttpGet]        
         public IActionResult Get()
         {
             var data = ClientRepo.GetAll();
             return Ok(data);
         }
 
-        [HttpPost("Delete")]
+        [HttpDelete]
         public IActionResult Delete(ClientVM ob)
         {
             var data = ClientRepo.Delete(ob);
@@ -67,7 +65,7 @@ namespace repo.Controllers
                 return BadRequest(new response { Message = "Can Not Delete" ,Status="Error"});
             return Ok(data);
         }
-        [HttpPost("Edit")]
+        [HttpPut]
         public IActionResult Edit(ClientVM ob)
         {
             var data = ClientRepo.Edit(ob);
@@ -75,12 +73,12 @@ namespace repo.Controllers
                 return BadRequest(new response { Message = "Can Not Edit", Status = "Error" });
             return Ok(data);
         }
-        [HttpPost("GetById")]
+        [HttpGet("{id}")]
         public IActionResult GetById(int id)
         {
             return Ok(ClientRepo.GetById(id));
         }
-        [HttpPost("Search")]
+        [HttpGet("{name}")]
         public IActionResult Search(string name)
         {
             return Ok(ClientRepo.Search(name));
