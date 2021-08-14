@@ -88,6 +88,15 @@ namespace authontecation
 
             services.AddScoped<IClientRepo, ClientRepo>();
             services.AddScoped<ICityRepo, CityRepo>();
+            services.AddScoped<IOrderRepo, OrderRepo>();
+            services.AddScoped<ISupplierRepo, SupplierRepo>();
+            services.AddScoped<IProductRepo, ProductRepo>();
+            services.AddScoped<IOperationRepo, OperationRepo>();
+            services.AddScoped<IShokakOperationRepo, ShokakOperationRepo>();
+            services.AddScoped<IBuyOrderRepo, BuyOrderRepo>();
+            services.AddScoped<IBuyOperationRepo, BuyOperationRepo>();
+
+
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.

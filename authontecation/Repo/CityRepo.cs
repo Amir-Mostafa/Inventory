@@ -30,14 +30,15 @@ namespace repo.Repo
             return ob;
         }
 
-        public CityVM Delete(CityVM ob)
+        public CityVM Delete(int id)
         {
             try
             {
-                City d = db.City.Where(n => n.Id == ob.Id).FirstOrDefault();
+                City d = db.City.Where(n => n.Id == id).FirstOrDefault();
                 db.Remove(d);
                 db.SaveChanges();
-                return ob;
+               CityVM data = mapper.Map<CityVM>(d);
+                return data;
             }
             catch
             {

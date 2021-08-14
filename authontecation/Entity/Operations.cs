@@ -15,7 +15,7 @@ namespace repo.Entity
         public string productAmount { get; set; }
         public string productPrice { get; set; }
 
-        public string Toala { get; set; }
+        public string Total{ get; set; }
 
         public string Profit { get; set; }
 

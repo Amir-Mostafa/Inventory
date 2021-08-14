@@ -23,7 +23,8 @@ namespace repo.Controllers
             ClientRepo = client;
         }
 
-        [HttpPost("Create")]
+        //[HttpPost("Create")]
+        [HttpPost]
         public IActionResult Create(ClientVM client)
         {
             if(ModelState.IsValid)
@@ -51,23 +52,25 @@ namespace repo.Controllers
             return BadRequest(data);
         }
 
-        [HttpGet("GetAll")]
-        
+       // [HttpGet("GetAll")]
+        [HttpGet]
         public IActionResult Get()
         {
             var data = ClientRepo.GetAll();
             return Ok(data);
         }
 
-        [HttpPost("Delete")]
-        public IActionResult Delete(ClientVM ob)
+       // [HttpPost("Delete")]
+       [HttpDelete]
+        public IActionResult Delete(int id)
         {
-            var data = ClientRepo.Delete(ob);
+            var data = ClientRepo.Delete(id);
             if(data==null)
                 return BadRequest(new response { Message = "Can Not Delete" ,Status="Error"});
             return Ok(data);
         }
-        [HttpPost("Edit")]
+       // [HttpPost("Edit")]
+       [HttpPut]
         public IActionResult Edit(ClientVM ob)
         {
             var data = ClientRepo.Edit(ob);
@@ -78,12 +81,18 @@ namespace repo.Controllers
         [HttpPost("GetById")]
         public IActionResult GetById(int id)
         {
-            return Ok(ClientRepo.GetById(id));
+            var data=ClientRepo.GetById(id);
+            if (data == null)
+                return BadRequest(new response { Message = "Not Found", Status = "Error" });
+            return Ok(data);
         }
         [HttpPost("Search")]
         public IActionResult Search(string name)
         {
-            return Ok(ClientRepo.Search(name));
+            var data=ClientRepo.Search(name);
+            if (data == null)
+                return BadRequest(new response { Message = "Not Found", Status = "Error" });
+            return Ok(data);
         }
 
     }

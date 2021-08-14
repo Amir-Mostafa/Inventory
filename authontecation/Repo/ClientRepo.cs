@@ -28,14 +28,15 @@ namespace repo.Repo
             return ob;
         }
 
-        public ClientVM Delete(ClientVM ob)
+        public ClientVM Delete(int id)
         {
             try
             {
-                Client d = db.Client.Where(n => n.Id == ob.Id).FirstOrDefault();
+                Client d = db.Client.Where(n => n.Id == id).FirstOrDefault();
                 db.Remove(d);
                 db.SaveChanges();
-                return ob;
+               ClientVM data = mapper.Map<ClientVM>(d);
+                return data;           
             }
             catch
             {

@@ -1,6 +1,4 @@
 ﻿using authontecation.Authontecation;
-using Microsoft.AspNetCore.Authorization;
-using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using repo.interfces;
 using repo.Models;
@@ -13,25 +11,23 @@ namespace repo.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]
-    
-    public class CityController : ControllerBase
+    public class OrdersController : ControllerBase
     {
-
-        public ICityRepo CityRepo { get; set; }
-        public CityController(ICityRepo city)
+        public IOrderRepo OrderRepo { get; set; }
+        public OrdersController(IOrderRepo Order)
         {
-            CityRepo = city;
+            OrderRepo = Order;
         }
 
-        //[HttpPost("Create")]
-        [HttpPost]
-        public IActionResult Create(CityVM client)
+      //  [HttpPost("Create")]
+      [HttpPost]
+        public IActionResult Create(OrdersVM Order)
         {
             if (ModelState.IsValid)
             {
                 try
                 {
-                    var c = CityRepo.Add(client);
+                    var c = OrderRepo.Add(Order);
                     return Ok(c);
                 }
                 catch (Exception ex)
@@ -53,27 +49,27 @@ namespace repo.Controllers
         }
 
        // [HttpGet("GetAll")]
-        [HttpGet]
+       [HttpGet]
         public IActionResult Get()
         {
-            var data = CityRepo.GetAll();
+            var data = OrderRepo.GetAll();
             return Ok(data);
         }
 
-      //  [HttpPost("Delete")]
-      [HttpDelete]
+       // [HttpPost("Delete")]
+       [HttpDelete]
         public IActionResult Delete(int id)
         {
-            var data = CityRepo.Delete(id);
+            var data = OrderRepo.Delete(id);
             if (data == null)
                 return BadRequest(new response { Message = "Can Not Delete", Status = "Error" });
             return Ok(data);
         }
        // [HttpPost("Edit")]
        [HttpPut]
-        public IActionResult Edit(CityVM ob)
+        public IActionResult Edit(OrdersVM ob)
         {
-            var data = CityRepo.Edit(ob);
+            var data = OrderRepo.Edit(ob);
             if (data == null)
                 return BadRequest(new response { Message = "Can Not Edit", Status = "Error" });
             return Ok(data);
@@ -81,15 +77,7 @@ namespace repo.Controllers
         [HttpPost("GetById")]
         public IActionResult GetById(int id)
         {
-            var data=CityRepo.GetById(id);
-            if (data == null)
-                return BadRequest(new response { Message = "Not Found", Status = "Error" });
-            return Ok(data);
-        }
-        [HttpPost("Search")]
-        public IActionResult Search(string name)
-        {
-          var data=CityRepo.Search(name);
+          var data=OrderRepo.GetById(id);
             if (data == null)
                 return BadRequest(new response { Message = "Not Found", Status = "Error" });
             return Ok(data);
