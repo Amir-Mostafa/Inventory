@@ -61,12 +61,12 @@ namespace repo.Controllers
             return Ok(data);
         }
 
-        [HttpDelete]
-        public IActionResult Delete(CityVM ob)
+        [HttpDelete("{id}")]
+        public IActionResult Delete(int id)
         {
-            var data = CityRepo.Delete(ob);
+            var data = CityRepo.Delete(id);
             if (data == null)
-                return BadRequest(new response { Message = "Can Not Delete", Status = "Error" });
+                return Ok(new response { Message = "Can Not Delete", Status = "Error" });
             return Ok(data);
         }
         [HttpPut]

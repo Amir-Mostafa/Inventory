@@ -12,8 +12,8 @@ namespace repo.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]
-    [Authorize]
     
+    [Authorize]
     public class ClientsController : ControllerBase
     {
         public IClientRepo ClientRepo { get; set; }
@@ -57,10 +57,10 @@ namespace repo.Controllers
             return Ok(data);
         }
 
-        [HttpDelete]
-        public IActionResult Delete(ClientVM ob)
+        [HttpDelete("{id}")]
+        public IActionResult Delete(int id)
         {
-            var data = ClientRepo.Delete(ob);
+            var data = ClientRepo.Delete(id);
             if(data==null)
                 return BadRequest(new response { Message = "Can Not Delete" ,Status="Error"});
             return Ok(data);

@@ -10,7 +10,7 @@ namespace repo.interfces
     {
         IQueryable<ClientVM> GetAll();
         ClientVM Add(ClientVM ob);
-        ClientVM Delete(ClientVM ob);
+        ClientVM Delete(int id);
         ClientVM Edit(ClientVM ob);
         ClientVM GetById(int id);
         IQueryable<ClientVM> Search(string name);

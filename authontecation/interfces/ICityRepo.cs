@@ -10,7 +10,7 @@ namespace repo.interfces
     {
         IQueryable<CityVM> GetAll();
         CityVM Add(CityVM ob);
-        CityVM Delete(CityVM ob);
+        CityVM Delete(int id);
         CityVM Edit(CityVM ob);
         CityVM GetById(int id);
         IQueryable<CityVM> Search(string name);
