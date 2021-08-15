@@ -3,15 +3,17 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using authontecation.Authontecation;
 
 namespace repo.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    partial class ApplicationDbContextModelSnapshot : ModelSnapshot
+    [Migration("20210814222050_ondelete")]
+    partial class ondelete
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -349,7 +351,7 @@ namespace repo.Migrations
                     b.Property<string>("Profit")
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<string>("Total")
+                    b.Property<string>("Toala")
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("Weight")

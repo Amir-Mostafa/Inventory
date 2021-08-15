@@ -34,11 +34,19 @@ namespace repo.Repo
         {
             try
             {
+<<<<<<< HEAD
                 City d = db.City.Where(n => n.Id == id).FirstOrDefault();
                 db.Remove(d);
                 db.SaveChanges();
                CityVM data = mapper.Map<CityVM>(d);
                 return data;
+=======
+                City d = db.City.Where(n => n.Id ==id).FirstOrDefault();
+                db.Remove(d);
+                db.SaveChanges();
+
+                return mapper.Map<CityVM>(d);
+>>>>>>> 80b442fecf3016c825ac67da35ce6bbc875c5461
             }
             catch
             {
@@ -60,7 +68,7 @@ namespace repo.Repo
             }
         }
 
-        [Authorize]
+        
         public IQueryable<CityVM> GetAll()
         {
             List<City> all = db.City.ToList();

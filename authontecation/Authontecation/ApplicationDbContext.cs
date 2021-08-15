@@ -32,7 +32,11 @@ namespace authontecation.Authontecation
         protected override void OnModelCreating(ModelBuilder builder)
         {
             base.OnModelCreating(builder);
-           
+            builder
+       .Entity<City>()
+       .HasMany(e => e.Clients)
+       .WithOne(e => e.City)
+       .OnDelete(DeleteBehavior.NoAction);
         }
     }
 }

@@ -13,7 +13,8 @@ namespace repo.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]
-    
+    [Authorize]
+
     public class CityController : ControllerBase
     {
 
@@ -23,7 +24,10 @@ namespace repo.Controllers
             CityRepo = city;
         }
 
+<<<<<<< HEAD
         //[HttpPost("Create")]
+=======
+>>>>>>> 80b442fecf3016c825ac67da35ce6bbc875c5461
         [HttpPost]
         public IActionResult Create(CityVM client)
         {
@@ -52,25 +56,39 @@ namespace repo.Controllers
             return BadRequest(data);
         }
 
+<<<<<<< HEAD
        // [HttpGet("GetAll")]
         [HttpGet]
+=======
+        [HttpGet]
+
+        
+>>>>>>> 80b442fecf3016c825ac67da35ce6bbc875c5461
         public IActionResult Get()
         {
             var data = CityRepo.GetAll();
             return Ok(data);
         }
 
+<<<<<<< HEAD
       //  [HttpPost("Delete")]
       [HttpDelete]
+=======
+        [HttpDelete("{id}")]
+>>>>>>> 80b442fecf3016c825ac67da35ce6bbc875c5461
         public IActionResult Delete(int id)
         {
             var data = CityRepo.Delete(id);
             if (data == null)
-                return BadRequest(new response { Message = "Can Not Delete", Status = "Error" });
+                return Ok(new response { Message = "Can Not Delete", Status = "Error" });
             return Ok(data);
         }
+<<<<<<< HEAD
        // [HttpPost("Edit")]
        [HttpPut]
+=======
+        [HttpPut]
+>>>>>>> 80b442fecf3016c825ac67da35ce6bbc875c5461
         public IActionResult Edit(CityVM ob)
         {
             var data = CityRepo.Edit(ob);
@@ -78,7 +96,7 @@ namespace repo.Controllers
                 return BadRequest(new response { Message = "Can Not Edit", Status = "Error" });
             return Ok(data);
         }
-        [HttpPost("GetById")]
+        [HttpGet("{id}")]
         public IActionResult GetById(int id)
         {
             var data=CityRepo.GetById(id);
@@ -86,7 +104,7 @@ namespace repo.Controllers
                 return BadRequest(new response { Message = "Not Found", Status = "Error" });
             return Ok(data);
         }
-        [HttpPost("Search")]
+        [HttpPost("{name}")]
         public IActionResult Search(string name)
         {
           var data=CityRepo.Search(name);

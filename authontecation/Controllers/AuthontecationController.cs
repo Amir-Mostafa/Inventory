@@ -70,7 +70,10 @@ namespace authontecation.Controllers
                     expiration = token.ValidTo
                 });
             }
-            return Unauthorized();
+            if(user==null)
+            return Ok(new response { Status="Error",Message="مستخدم غير مسجل"});
+            else
+                return Ok(new response { Status = "Error", Message = "كلمه المرور غير صحيحه" });
         }
         [HttpPost]
         [Route("register")]
@@ -87,7 +90,6 @@ namespace authontecation.Controllers
                 UserName = model.UserName
             };
             var result = await userManager.CreateAsync(user, model.Password);
-
 
             if (!result.Succeeded)
             {
@@ -160,9 +162,41 @@ namespace authontecation.Controllers
 
             return BadRequest(new response { Message = "Invakid Data", Status = "Error" });
         }
+        [HttpPost]
+        [Route("IsTokenValid")]
+        public IActionResult IsTokenValid(string token)
+        {
+            var mySecret = Encoding.UTF8.GetBytes(_configuration["JWT:Secret"]);
+            var mySecurityKey = new SymmetricSecurityKey(mySecret);
+            var tokenHandler = new JwtSecurityTokenHandler();
+            try
+            {
+                tokenHandler.ValidateToken(token,
+                new TokenValidationParameters
+                {
+                    ValidateIssuerSigningKey = true,
+                    ValidateIssuer = true,
+                    ValidateAudience = true,
+                    ValidIssuer = _configuration["JWT:ValidIssuer"],
+                    ValidAudience = _configuration["JWT:ValidAudience"],
+                    IssuerSigningKey = mySecurityKey,
+                }, out SecurityToken validatedToken);
+            }
+            catch
+            {
+                return Ok(new { Message="Invalid Token"});
+            }
+            return   Ok(new { Message = "valid Token" }); ;
+        }
+        [HttpPost("Logout")]
+        public async Task<ActionResult> Logout()
+        {
+            
+            return Ok();
+        }
 
 
-  
+
     }
     
 }

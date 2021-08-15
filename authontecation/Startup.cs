@@ -62,8 +62,8 @@ namespace authontecation
                 options.DefaultAuthenticateScheme = JwtBearerDefaults.AuthenticationScheme;
                 options.DefaultChallengeScheme = JwtBearerDefaults.AuthenticationScheme;
                 options.DefaultScheme = JwtBearerDefaults.AuthenticationScheme;
-            }) 
-                // Adding Jwt Bearer  
+            })
+            // Adding Jwt Bearer  
             .AddJwtBearer(options =>
             {
                 options.SaveToken = true;
@@ -78,6 +78,25 @@ namespace authontecation
                 };
             });
 
+
+       //     services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme)
+       //.AddJwtBearer(options =>
+       //{
+       //    var keybytes = Encoding.ASCII.GetBytes(Configuration["JWT:Secret"]);
+       //    var signingKey = new Microsoft.IdentityModel.Tokens.SymmetricSecurityKey(keybytes);
+       //    options.TokenValidationParameters = new TokenValidationParameters
+       //    {
+       //        IssuerSigningKey = signingKey,
+       //        ValidateIssuer = true,
+       //        ValidateAudience = true,
+       //        ValidateLifetime = true,
+       //        ValidateIssuerSigningKey = true,
+       //        ValidIssuer = Configuration["Jwt:ValidIssuer"],
+       //        ValidAudience = Configuration["Jwt:ValidAudience"]
+
+       //    };
+       //});
+
             //mail
             //services.Configure<MailSettings>(Configuration.GetSection("MailSettings"));
             //services.AddTransient<IMailService, MailServiceRepo>();
@@ -85,7 +104,14 @@ namespace authontecation
             //automapper
             services.AddAutoMapper(x => x.AddProfile(new DomainProfile()));
 
-
+            services.AddCors(o => o.AddPolicy("CorsPolicy", builder =>
+            {
+                builder.AllowAnyOrigin()
+                       .AllowAnyMethod()
+                       .AllowAnyHeader()
+                       .AllowCredentials()
+                       .WithOrigins("http://localhost:4200");
+            }));
             services.AddScoped<IClientRepo, ClientRepo>();
             services.AddScoped<ICityRepo, CityRepo>();
             services.AddScoped<IOrderRepo, OrderRepo>();
@@ -110,10 +136,8 @@ namespace authontecation
             }
 
             app.UseHttpsRedirection();
-
+            app.UseCors("CorsPolicy");
             app.UseRouting();
-            app.UseAuthentication();
-            app.UseAuthorization();
 
             app.Use(async (context, next) =>
             {
@@ -124,6 +148,10 @@ namespace authontecation
                     await context.Response.WriteAsync("Token Validation Has Failed. Request Access Denied");
                 }
             });
+            app.UseAuthentication();
+            app.UseAuthorization();
+
+            
             
 
             app.UseEndpoints(endpoints =>
