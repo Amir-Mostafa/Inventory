@@ -1,9 +1,8 @@
 ﻿using authontecation.Authontecation;
-using Microsoft.AspNetCore.Authorization;
-using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using repo.interfces;
 using repo.Models;
+using repo.Repo;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -13,29 +12,23 @@ namespace repo.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]
-    [Authorize]
-
-    public class CityController : ControllerBase
+    public class BuyOperationsController : ControllerBase
     {
-
-        public ICityRepo CityRepo { get; set; }
-        public CityController(ICityRepo city)
+        public IBuyOperationRepo BuyOperationRepo { get; set; }
+        public BuyOperationsController(IBuyOperationRepo BuyOperation)
         {
-            CityRepo = city;
+            BuyOperationRepo = BuyOperation;
         }
 
-<<<<<<< HEAD
-        //[HttpPost("Create")]
-=======
->>>>>>> 80b442fecf3016c825ac67da35ce6bbc875c5461
+        // [HttpPost("Create")]
         [HttpPost]
-        public IActionResult Create(CityVM client)
+        public IActionResult Create(BuyOperationsVM BuyOperation)
         {
             if (ModelState.IsValid)
             {
                 try
                 {
-                    var c = CityRepo.Add(client);
+                    var c = BuyOperationRepo.Add(BuyOperation);
                     return Ok(c);
                 }
                 catch (Exception ex)
@@ -56,58 +49,38 @@ namespace repo.Controllers
             return BadRequest(data);
         }
 
-<<<<<<< HEAD
        // [HttpGet("GetAll")]
-        [HttpGet]
-=======
-        [HttpGet]
+       [HttpGet]
 
-        
->>>>>>> 80b442fecf3016c825ac67da35ce6bbc875c5461
         public IActionResult Get()
         {
-            var data = CityRepo.GetAll();
+            var data = BuyOperationRepo.GetAll();
             return Ok(data);
         }
 
-<<<<<<< HEAD
-      //  [HttpPost("Delete")]
-      [HttpDelete]
-=======
-        [HttpDelete("{id}")]
->>>>>>> 80b442fecf3016c825ac67da35ce6bbc875c5461
+        //[HttpPost("Delete")]
+        [HttpDelete]
+
         public IActionResult Delete(int id)
         {
-            var data = CityRepo.Delete(id);
+            var data = BuyOperationRepo.Delete(id);
             if (data == null)
-                return Ok(new response { Message = "Can Not Delete", Status = "Error" });
+                return BadRequest(new response { Message = "Can Not Delete", Status = "Error" });
             return Ok(data);
         }
-<<<<<<< HEAD
-       // [HttpPost("Edit")]
-       [HttpPut]
-=======
+        //[HttpPost("Edit")]
         [HttpPut]
->>>>>>> 80b442fecf3016c825ac67da35ce6bbc875c5461
-        public IActionResult Edit(CityVM ob)
+        public IActionResult Edit(BuyOperationsVM ob)
         {
-            var data = CityRepo.Edit(ob);
+            var data = BuyOperationRepo.Edit(ob);
             if (data == null)
                 return BadRequest(new response { Message = "Can Not Edit", Status = "Error" });
             return Ok(data);
         }
-        [HttpGet("{id}")]
+        [HttpPost("GetById")]
         public IActionResult GetById(int id)
         {
-            var data=CityRepo.GetById(id);
-            if (data == null)
-                return BadRequest(new response { Message = "Not Found", Status = "Error" });
-            return Ok(data);
-        }
-        [HttpPost("{name}")]
-        public IActionResult Search(string name)
-        {
-          var data=CityRepo.Search(name);
+           var data=BuyOperationRepo.GetById(id);
             if (data == null)
                 return BadRequest(new response { Message = "Not Found", Status = "Error" });
             return Ok(data);

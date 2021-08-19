@@ -19,7 +19,7 @@ namespace repo.Models
         public string productPrice { get; set; }
 
         [Required(ErrorMessage = "Total Require")]
-        public string Toala { get; set; }
+        public string Total { get; set; }
 
         [Required(ErrorMessage = "Profit Require")]
         public string Profit { get; set; }
@@ -33,7 +33,10 @@ namespace repo.Models
 
 
         public int OrderId { get; set; }
+        public int ClientId { get; set; }
 
-      
+        public int ProductId { get; set; }
+
+
     }
 }

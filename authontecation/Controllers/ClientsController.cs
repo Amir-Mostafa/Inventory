@@ -22,6 +22,10 @@ namespace repo.Controllers
             ClientRepo = client;
         }
 
+<<<<<<< HEAD
+        //[HttpPost("Create")]
+=======
+>>>>>>> 80b442fecf3016c825ac67da35ce6bbc875c5461
         [HttpPost]
         public IActionResult Create(ClientVM client)
         {
@@ -50,14 +54,24 @@ namespace repo.Controllers
             return BadRequest(data);
         }
 
+<<<<<<< HEAD
+       // [HttpGet("GetAll")]
+        [HttpGet]
+=======
         [HttpGet]        
+>>>>>>> 80b442fecf3016c825ac67da35ce6bbc875c5461
         public IActionResult Get()
         {
             var data = ClientRepo.GetAll();
             return Ok(data);
         }
 
+<<<<<<< HEAD
+       // [HttpPost("Delete")]
+       [HttpDelete]
+=======
         [HttpDelete("{id}")]
+>>>>>>> 80b442fecf3016c825ac67da35ce6bbc875c5461
         public IActionResult Delete(int id)
         {
             var data = ClientRepo.Delete(id);
@@ -65,7 +79,12 @@ namespace repo.Controllers
                 return BadRequest(new response { Message = "Can Not Delete" ,Status="Error"});
             return Ok(data);
         }
+<<<<<<< HEAD
+       // [HttpPost("Edit")]
+       [HttpPut]
+=======
         [HttpPut]
+>>>>>>> 80b442fecf3016c825ac67da35ce6bbc875c5461
         public IActionResult Edit(ClientVM ob)
         {
             var data = ClientRepo.Edit(ob);
@@ -76,14 +95,20 @@ namespace repo.Controllers
         [HttpGet("{id}")]
         public IActionResult GetById(int id)
         {
-            return Ok(ClientRepo.GetById(id));
+            var data=ClientRepo.GetById(id);
+            if (data == null)
+                return BadRequest(new response { Message = "Not Found", Status = "Error" });
+            return Ok(data);
         }
 
         
         [HttpPost("{name}")]
         public IActionResult Search(string name)
         {
-            return Ok(ClientRepo.Search(name));
+            var data=ClientRepo.Search(name);
+            if (data == null)
+                return BadRequest(new response { Message = "Not Found", Status = "Error" });
+            return Ok(data);
         }
 
     }

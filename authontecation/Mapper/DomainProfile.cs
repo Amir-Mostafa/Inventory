@@ -8,7 +8,7 @@ using System.Threading.Tasks;
 
 namespace repo.Mapper
 {
-    public class DomainProfile:Profile
+    public class DomainProfile : Profile
     {
         public DomainProfile()
         {

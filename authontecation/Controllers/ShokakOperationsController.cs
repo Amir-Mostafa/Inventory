@@ -1,6 +1,4 @@
 ﻿using authontecation.Authontecation;
-using Microsoft.AspNetCore.Authorization;
-using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using repo.interfces;
 using repo.Models;
@@ -13,29 +11,23 @@ namespace repo.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]
-    [Authorize]
-
-    public class CityController : ControllerBase
+    public class ShokakOperationsController : ControllerBase
     {
-
-        public ICityRepo CityRepo { get; set; }
-        public CityController(ICityRepo city)
+        public IShokakOperationRepo ShokakOperationRepo { get; set; }
+        public ShokakOperationsController(IShokakOperationRepo ShokakOperation)
         {
-            CityRepo = city;
+            ShokakOperationRepo = ShokakOperation;
         }
 
-<<<<<<< HEAD
-        //[HttpPost("Create")]
-=======
->>>>>>> 80b442fecf3016c825ac67da35ce6bbc875c5461
-        [HttpPost]
-        public IActionResult Create(CityVM client)
+       // [HttpPost("Create")]
+       [HttpPost]
+        public IActionResult Create(ShokakOperationVM ShokakOperation)
         {
             if (ModelState.IsValid)
             {
                 try
                 {
-                    var c = CityRepo.Add(client);
+                    var c = ShokakOperationRepo.Add(ShokakOperation);
                     return Ok(c);
                 }
                 catch (Exception ex)
@@ -56,61 +48,40 @@ namespace repo.Controllers
             return BadRequest(data);
         }
 
-<<<<<<< HEAD
        // [HttpGet("GetAll")]
-        [HttpGet]
-=======
-        [HttpGet]
-
-        
->>>>>>> 80b442fecf3016c825ac67da35ce6bbc875c5461
+       [HttpGet]
         public IActionResult Get()
         {
-            var data = CityRepo.GetAll();
+            var data = ShokakOperationRepo.GetAll();
             return Ok(data);
         }
 
-<<<<<<< HEAD
-      //  [HttpPost("Delete")]
-      [HttpDelete]
-=======
-        [HttpDelete("{id}")]
->>>>>>> 80b442fecf3016c825ac67da35ce6bbc875c5461
+        //[HttpPost("Delete")]
+        [HttpDelete]
         public IActionResult Delete(int id)
         {
-            var data = CityRepo.Delete(id);
+            var data = ShokakOperationRepo.Delete(id);
             if (data == null)
-                return Ok(new response { Message = "Can Not Delete", Status = "Error" });
+                return BadRequest(new response { Message = "Can Not Delete", Status = "Error" });
             return Ok(data);
         }
-<<<<<<< HEAD
-       // [HttpPost("Edit")]
-       [HttpPut]
-=======
+        //[HttpPost("Edit")]
         [HttpPut]
->>>>>>> 80b442fecf3016c825ac67da35ce6bbc875c5461
-        public IActionResult Edit(CityVM ob)
+        public IActionResult Edit(ShokakOperationVM ob)
         {
-            var data = CityRepo.Edit(ob);
+            var data = ShokakOperationRepo.Edit(ob);
             if (data == null)
                 return BadRequest(new response { Message = "Can Not Edit", Status = "Error" });
             return Ok(data);
         }
-        [HttpGet("{id}")]
+        [HttpPost("GetById")]
         public IActionResult GetById(int id)
         {
-            var data=CityRepo.GetById(id);
+            var data=ShokakOperationRepo.GetById(id);
             if (data == null)
                 return BadRequest(new response { Message = "Not Found", Status = "Error" });
             return Ok(data);
         }
-        [HttpPost("{name}")]
-        public IActionResult Search(string name)
-        {
-          var data=CityRepo.Search(name);
-            if (data == null)
-                return BadRequest(new response { Message = "Not Found", Status = "Error" });
-            return Ok(data);
-        }
+
     }
 }

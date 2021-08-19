@@ -35,8 +35,13 @@ namespace repo.Repo
                 Client d = db.Client.Where(n => n.Id == id).FirstOrDefault();
                 db.Remove(d);
                 db.SaveChanges();
+<<<<<<< HEAD
+               ClientVM data = mapper.Map<ClientVM>(d);
+                return data;           
+=======
 
                 return mapper.Map<ClientVM>(d);
+>>>>>>> 80b442fecf3016c825ac67da35ce6bbc875c5461
             }
             catch
             {
