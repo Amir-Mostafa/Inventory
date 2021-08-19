@@ -78,7 +78,9 @@ namespace repo.Controllers
         {
             return Ok(ClientRepo.GetById(id));
         }
-        [HttpGet("{name}")]
+
+        
+        [HttpPost("{name}")]
         public IActionResult Search(string name)
         {
             return Ok(ClientRepo.Search(name));
