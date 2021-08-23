@@ -13,5 +13,6 @@ namespace repo.interfces
         ProductsVM Delete(int id);
         ProductsVM Edit(ProductsVM ob);
         ProductsVM GetById(int id);
+        IQueryable<ProductsVM> Search(string name);
     }
 }

@@ -72,5 +72,10 @@ namespace repo.Repo
             ProductsVM data = db.Products.Where(n => n.Id == id).Select(n => new ProductsVM { Id = n.Id, Name = n.Name, BuyPrice = n.BuyPrice, SellPrice = n.SellPrice, Notes = n.Notes, Profit = n.Profit, Weight = n.Weight }).FirstOrDefault();
             return data;
         }
+        public IQueryable<ProductsVM> Search(string name)
+        {
+            var data = db.Products.Where(n => n.Name.Contains(name)).Select(n => new ProductsVM { Id = n.Id, Name = n.Name,BuyPrice=n.BuyPrice,Notes=n.Notes,Profit=n.Profit,SellPrice=n.SellPrice,Weight=n.Weight });
+            return data;
+        }
     }
 }

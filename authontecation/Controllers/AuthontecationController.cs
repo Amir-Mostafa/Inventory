@@ -67,6 +67,7 @@ namespace authontecation.Controllers
                 return Ok(new
                 {
                     token = new JwtSecurityTokenHandler().WriteToken(token),
+                    name=user.UserName,
                     expiration = token.ValidTo
                 });
             }

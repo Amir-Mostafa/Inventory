@@ -22,10 +22,7 @@ namespace repo.Controllers
             ClientRepo = client;
         }
 
-<<<<<<< HEAD
-        //[HttpPost("Create")]
-=======
->>>>>>> 80b442fecf3016c825ac67da35ce6bbc875c5461
+
         [HttpPost]
         public IActionResult Create(ClientVM client)
         {
@@ -54,24 +51,19 @@ namespace repo.Controllers
             return BadRequest(data);
         }
 
-<<<<<<< HEAD
-       // [HttpGet("GetAll")]
         [HttpGet]
-=======
-        [HttpGet]        
->>>>>>> 80b442fecf3016c825ac67da35ce6bbc875c5461
+
         public IActionResult Get()
         {
             var data = ClientRepo.GetAll();
             return Ok(data);
         }
 
-<<<<<<< HEAD
-       // [HttpPost("Delete")]
-       [HttpDelete]
-=======
+
+
+
         [HttpDelete("{id}")]
->>>>>>> 80b442fecf3016c825ac67da35ce6bbc875c5461
+
         public IActionResult Delete(int id)
         {
             var data = ClientRepo.Delete(id);
@@ -79,12 +71,9 @@ namespace repo.Controllers
                 return BadRequest(new response { Message = "Can Not Delete" ,Status="Error"});
             return Ok(data);
         }
-<<<<<<< HEAD
-       // [HttpPost("Edit")]
+
        [HttpPut]
-=======
-        [HttpPut]
->>>>>>> 80b442fecf3016c825ac67da35ce6bbc875c5461
+
         public IActionResult Edit(ClientVM ob)
         {
             var data = ClientRepo.Edit(ob);

@@ -60,7 +60,7 @@ namespace repo.Controllers
         }
 
        // [HttpPost("Delete")]
-       [HttpDelete]
+       [HttpDelete("{id}")]
         public IActionResult Delete(int id)
         {
             var data = ProductRepo.Delete(id);
@@ -81,6 +81,15 @@ namespace repo.Controllers
         public IActionResult GetById(int id)
         {
             var data=ProductRepo.GetById(id);
+            if (data == null)
+                return BadRequest(new response { Message = "Not Found", Status = "Error" });
+            return Ok(data);
+        }
+
+        [HttpGet("{name}")]
+        public IActionResult search(string name)
+        {
+            var data = ProductRepo.Search(name);
             if (data == null)
                 return BadRequest(new response { Message = "Not Found", Status = "Error" });
             return Ok(data);

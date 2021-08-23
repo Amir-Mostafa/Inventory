@@ -27,7 +27,8 @@ namespace repo.Repo
 
             db.Orders.Add(data);
             db.SaveChanges();
-            return ob;
+            db.Entry(data).Reload();
+            return mapper.Map<OrdersVM>(data);
         }
 
         public OrdersVM Delete(int id)
