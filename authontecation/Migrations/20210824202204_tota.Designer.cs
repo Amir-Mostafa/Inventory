@@ -10,8 +10,8 @@ using authontecation.Authontecation;
 namespace repo.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    [Migration("20210814222050_ondelete")]
-    partial class ondelete
+    [Migration("20210824202204_tota")]
+    partial class tota
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -351,7 +351,7 @@ namespace repo.Migrations
                     b.Property<string>("Profit")
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<string>("Toala")
+                    b.Property<string>("Total")
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("Weight")

@@ -13,7 +13,11 @@ namespace repo.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]
+<<<<<<< HEAD
   //  [Authorize]
+=======
+    
+>>>>>>> 76fa1f6df54e93fd0130910bff52376e26571c13
 
     public class CityController : ControllerBase
     {
@@ -90,7 +94,7 @@ namespace repo.Controllers
                 return BadRequest(new response { Message = "Not Found", Status = "Error" });
             return Ok(data);
         }
-        [HttpPost("{name}")]
+        [HttpGet("{name}")]
         public IActionResult Search(string name)
         {
           var data=CityRepo.Search(name);

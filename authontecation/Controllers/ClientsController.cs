@@ -13,7 +13,11 @@ namespace repo.Controllers
     [Route("api/[controller]")]
     [ApiController]
     
+<<<<<<< HEAD
     //[Authorize]
+=======
+    
+>>>>>>> 76fa1f6df54e93fd0130910bff52376e26571c13
     public class ClientsController : ControllerBase
     {
         public IClientRepo ClientRepo { get; set; }
@@ -91,7 +95,7 @@ namespace repo.Controllers
         }
 
         
-        [HttpPost("{name}")]
+        [HttpGet("{name}")]
         public IActionResult Search(string name)
         {
             var data=ClientRepo.Search(name);

@@ -77,7 +77,7 @@ namespace repo.Controllers
                 return BadRequest(new response { Message = "Can Not Edit", Status = "Error" });
             return Ok(data);
         }
-        [HttpPost("{id}")]
+        [HttpGet("{id}")]
         public IActionResult GetById(int id)
         {
             var data=ProductRepo.GetById(id);

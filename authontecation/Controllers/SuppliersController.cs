@@ -74,7 +74,7 @@ namespace repo.Controllers
                 return BadRequest(new response { Message = "Can Not Edit", Status = "Error" });
             return Ok(data);
         }
-        [HttpPost("{id}")]
+        [HttpGet("{id}")]
         public IActionResult GetById(int id)
         {
 
@@ -83,7 +83,7 @@ namespace repo.Controllers
                 return BadRequest(new response { Message = "Not Found", Status = "Error" });
             return Ok(data);
         }
-        [HttpPost("{name}")]
+        [HttpGet("{name}")]
         public IActionResult Search(string name)
         {
            var data=SupplierRepo.Search(name);
