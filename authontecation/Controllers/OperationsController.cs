@@ -25,15 +25,15 @@ namespace repo.Controllers
         {
             if (ModelState.IsValid)
             {
-                try
-                {
+                //try
+                //{
                     var c = OperationRepo.Add(Operation);
                     return Ok(c);
-                }
-                catch (Exception ex)
-                {
-                    return BadRequest(ex.Message);
-                }
+              //  }
+                //catch (Exception ex)
+                //{
+                //    return BadRequest(ex.Message);
+                //}
 
             }
 
@@ -74,7 +74,7 @@ namespace repo.Controllers
                 return BadRequest(new response { Message = "Can Not Edit", Status = "Error" });
             return Ok(data);
         }
-        [HttpPost("{id}")]
+        [HttpGet("{id}")]
         public IActionResult GetById(int id)
         {
             var data=OperationRepo.GetById(id);
@@ -82,7 +82,7 @@ namespace repo.Controllers
                 return BadRequest(new response { Message = "Not Found", Status = "Error" });
             return Ok(data);
         }
-        [HttpPost("OperationsByOrderId")]
+        [HttpGet("OperationsByOrderId/{id}")]
         public IActionResult OperationsByOrderId(int id)
         {
             var data = OperationRepo.OperationsByOrderId(id);

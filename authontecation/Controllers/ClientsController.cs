@@ -13,7 +13,7 @@ namespace repo.Controllers
     [Route("api/[controller]")]
     [ApiController]
     
-    [Authorize]
+    
     public class ClientsController : ControllerBase
     {
         public IClientRepo ClientRepo { get; set; }

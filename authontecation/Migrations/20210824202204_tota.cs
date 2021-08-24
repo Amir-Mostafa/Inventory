@@ -3,7 +3,7 @@ using Microsoft.EntityFrameworkCore.Migrations;
 
 namespace repo.Migrations
 {
-    public partial class init : Migration
+    public partial class tota : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {
@@ -217,8 +217,7 @@ namespace repo.Migrations
                         name: "FK_Client_City_CityId",
                         column: x => x.CityId,
                         principalTable: "City",
-                        principalColumn: "Id",
-                        onDelete: ReferentialAction.Cascade);
+                        principalColumn: "Id");
                 });
 
             migrationBuilder.CreateTable(
@@ -314,7 +313,7 @@ namespace repo.Migrations
                         .Annotation("SqlServer:Identity", "1, 1"),
                     productAmount = table.Column<string>(type: "nvarchar(max)", nullable: true),
                     productPrice = table.Column<string>(type: "nvarchar(max)", nullable: true),
-                    Toala = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    Total = table.Column<string>(type: "nvarchar(max)", nullable: true),
                     Profit = table.Column<string>(type: "nvarchar(max)", nullable: true),
                     date = table.Column<DateTime>(type: "datetime2", nullable: false),
                     Notes = table.Column<string>(type: "nvarchar(max)", nullable: true),
