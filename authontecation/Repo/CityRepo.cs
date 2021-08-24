@@ -87,6 +87,11 @@ namespace repo.Repo
             var data = db.City.Where(n => n.Name.Contains(name)).Select(n => new CityVM { Id = n.Id,Name= n.Name});
             return data;
         }
+
+        public CityVM update(CityVM ob)
+        {
+            throw new NotImplementedException();
+        }
     }
 }
 
