@@ -57,7 +57,7 @@ namespace repo.Controllers
         }
 
         //[HttpPost("Delete")]
-        [HttpDelete]
+        [HttpDelete("{id}")]
         public IActionResult Delete(int id)
         {
             var data = SupplierRepo.Delete(id);
@@ -74,7 +74,7 @@ namespace repo.Controllers
                 return BadRequest(new response { Message = "Can Not Edit", Status = "Error" });
             return Ok(data);
         }
-        [HttpPost("GetById")]
+        [HttpPost("{id}")]
         public IActionResult GetById(int id)
         {
 
@@ -83,7 +83,7 @@ namespace repo.Controllers
                 return BadRequest(new response { Message = "Not Found", Status = "Error" });
             return Ok(data);
         }
-        [HttpPost("Search")]
+        [HttpPost("{name}")]
         public IActionResult Search(string name)
         {
            var data=SupplierRepo.Search(name);

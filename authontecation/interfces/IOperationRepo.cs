@@ -13,5 +13,7 @@ namespace repo.interfces
         OperationsVM Delete(int id);
         OperationsVM Edit(OperationsVM ob);
         OperationsVM GetById(int id);
+        IQueryable<OperationsVM> OperationsByOrderId(int id);
+
     }
 }

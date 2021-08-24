@@ -57,7 +57,7 @@ namespace repo.Controllers
         }
 
        // [HttpPost("Delete")]
-       [HttpDelete]
+       [HttpDelete("{id}")]
         public IActionResult Delete(int id)
         {
             var data = OrderRepo.Delete(id);
@@ -74,7 +74,7 @@ namespace repo.Controllers
                 return BadRequest(new response { Message = "Can Not Edit", Status = "Error" });
             return Ok(data);
         }
-        [HttpPost("GetById")]
+        [HttpPost("{id}")]
         public IActionResult GetById(int id)
         {
           var data=OrderRepo.GetById(id);
