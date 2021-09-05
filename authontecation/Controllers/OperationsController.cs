@@ -71,7 +71,7 @@ namespace repo.Controllers
         {
             var data = OperationRepo.Edit(ob);
             if (data == null)
-                return BadRequest(new response { Message = "Can Not Edit", Status = "Error" });
+                return Ok(new response { Message = "Can Not Edit", Status = "Error" });
             return Ok(data);
         }
         [HttpGet("{id}")]

@@ -13,5 +13,8 @@ namespace repo.interfces
         OrdersVM Delete(int id);
         OrdersVM Edit(OrdersVM ob);
         OrdersVM GetById(int id);
+        OrdersVM NextOrder(int id);
+        OrdersVM PrevOrder(int id);
+        OrdersVM LastOrder();
     }
 }

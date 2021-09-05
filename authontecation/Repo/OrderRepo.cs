@@ -74,6 +74,60 @@ namespace repo.Repo
             return data;
         }
 
-     
+        public OrdersVM NextOrder(int id)
+        {
+            int idd = 0;
+            Orders o= db.Orders.OrderByDescending(o => o.Id).FirstOrDefault();
+            if (o != null)
+                idd = o.Id;
+
+            if (id < idd)
+            {
+                id++;
+
+                OrdersVM data = db.Orders.Where(n => n.Id == id).Select(n => new OrdersVM { Id = n.Id, Date = n.Date, Total = n.Total, UserName = n.UserName, Paid = n.Paid, Remaind = n.Remaind, Weight = n.Weight, ClientId = n.ClientId }).FirstOrDefault();
+                while (data == null && id <= idd)
+                {
+                    data = db.Orders.Where(n => n.Id == id).Select(n => new OrdersVM { Id = n.Id, Date = n.Date, Total = n.Total, UserName = n.UserName, Paid = n.Paid, Remaind = n.Remaind, Weight = n.Weight, ClientId = n.ClientId }).FirstOrDefault();
+                    id++;
+                }
+                return data;
+            }
+            else
+                return null;
+        }
+        public OrdersVM PrevOrder(int id)
+        {
+            int idd = 0;
+            Orders o = db.Orders.OrderBy(o => o.Id).FirstOrDefault();
+            if (o != null)
+                idd = o.Id;
+
+            if (id > idd)
+            {
+                id--;
+
+                OrdersVM data = db.Orders.Where(n => n.Id == id).Select(n => new OrdersVM { Id = n.Id, Date = n.Date, Total = n.Total, UserName = n.UserName, Paid = n.Paid, Remaind = n.Remaind, Weight = n.Weight, ClientId = n.ClientId }).FirstOrDefault();
+                while (data == null && id >= idd)
+                {
+                    data = db.Orders.Where(n => n.Id == id).Select(n => new OrdersVM { Id = n.Id, Date = n.Date, Total = n.Total, UserName = n.UserName, Paid = n.Paid, Remaind = n.Remaind, Weight = n.Weight, ClientId = n.ClientId }).FirstOrDefault();
+                    id--;
+                }
+                return data;
+            }
+            else
+                return null;
+        }
+        public OrdersVM LastOrder()
+        {
+            Orders o = db.Orders.OrderByDescending(o => o.Id).FirstOrDefault();
+
+            if (o == null)
+                return null;
+            else
+                return mapper.Map<OrdersVM>(o);
+        }
+
+
     }
 }

@@ -71,7 +71,7 @@ namespace repo.Controllers
         {
             var data = OrderRepo.Edit(ob);
             if (data == null)
-                return BadRequest(new response { Message = "Can Not Edit", Status = "Error" });
+                return Ok(new response { Message = "Can Not Edit", Status = "Error" });
             return Ok(data);
         }
         [HttpGet("{id}")]
@@ -79,7 +79,33 @@ namespace repo.Controllers
         {
           var data=OrderRepo.GetById(id);
             if (data == null)
-                return BadRequest(new response { Message = "Not Found", Status = "Error" });
+                return Ok(new response { Message = "Not Found", Status = "Error" });
+            return Ok(data);
+        }
+        [HttpGet("NextOrder/{id}")]
+        public IActionResult NextOrder(int id)
+        {
+            var data = OrderRepo.NextOrder(id);
+            if (data == null)
+                return Ok(new response { Message = "Not Found", Status = "Error" });
+            return Ok(data);
+        }
+
+        [HttpGet("PrevOrder/{id}")]
+        public IActionResult PrevOrder(int id)
+        {
+            var data = OrderRepo.PrevOrder(id);
+            if (data == null)
+                return Ok(new response { Message = "Not Found", Status = "Error" });
+            return Ok(data);
+        }
+
+        [HttpGet("LastOrder")]
+        public IActionResult LastOrder()
+        {
+            var data = OrderRepo.LastOrder();
+            if (data == null)
+                return Ok(new response { Message = "Not Found", Status = "Error" });
             return Ok(data);
         }
     }

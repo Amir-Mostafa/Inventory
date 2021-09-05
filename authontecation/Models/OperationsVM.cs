@@ -30,7 +30,7 @@ namespace repo.Models
         public string Notes { get; set; }
 
         public string Weight { get; set; }
-
+        public string name { get; set; }
 
         public int OrderId { get; set; }
         public int ClientId { get; set; }
