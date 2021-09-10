@@ -30,5 +30,6 @@ namespace repo.Models
         public int ClientId { get; set; }
         public int OrderId { get; set; }
 
+        public string total { get; set; }
     }
 }
