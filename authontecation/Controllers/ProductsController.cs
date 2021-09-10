@@ -86,7 +86,7 @@ namespace repo.Controllers
             return Ok(data);
         }
 
-        [HttpGet("{name}")]
+        [HttpGet("search/{name}")]
         public IActionResult search(string name)
         {
             var data = ProductRepo.Search(name);

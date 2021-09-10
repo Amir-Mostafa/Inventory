@@ -3,7 +3,7 @@ using Microsoft.EntityFrameworkCore.Migrations;
 
 namespace repo.Migrations
 {
-    public partial class tota : Migration
+    public partial class all : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {
@@ -278,31 +278,32 @@ namespace repo.Migrations
                     Date = table.Column<DateTime>(type: "datetime2", nullable: false),
                     Total = table.Column<string>(type: "nvarchar(max)", nullable: true),
                     Notes = table.Column<string>(type: "nvarchar(max)", nullable: true),
-                    OrderId = table.Column<int>(type: "int", nullable: true),
-                    SupplierId = table.Column<int>(type: "int", nullable: true),
-                    ProductId = table.Column<int>(type: "int", nullable: true)
+                    orderId = table.Column<int>(type: "int", nullable: false),
+                    supplierId = table.Column<int>(type: "int", nullable: false),
+                    productId = table.Column<int>(type: "int", nullable: false),
+                    BuyOrderId = table.Column<int>(type: "int", nullable: true)
                 },
                 constraints: table =>
                 {
                     table.PrimaryKey("PK_BuyOperations", x => x.Id);
                     table.ForeignKey(
-                        name: "FK_BuyOperations_BuyOrders_OrderId",
-                        column: x => x.OrderId,
+                        name: "FK_BuyOperations_BuyOrders_BuyOrderId",
+                        column: x => x.BuyOrderId,
                         principalTable: "BuyOrders",
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Restrict);
                     table.ForeignKey(
-                        name: "FK_BuyOperations_Products_ProductId",
-                        column: x => x.ProductId,
+                        name: "FK_BuyOperations_Products_productId",
+                        column: x => x.productId,
                         principalTable: "Products",
                         principalColumn: "Id",
-                        onDelete: ReferentialAction.Restrict);
+                        onDelete: ReferentialAction.Cascade);
                     table.ForeignKey(
-                        name: "FK_BuyOperations_Suppliers_SupplierId",
-                        column: x => x.SupplierId,
+                        name: "FK_BuyOperations_Suppliers_supplierId",
+                        column: x => x.supplierId,
                         principalTable: "Suppliers",
                         principalColumn: "Id",
-                        onDelete: ReferentialAction.Restrict);
+                        onDelete: ReferentialAction.Cascade);
                 });
 
             migrationBuilder.CreateTable(
@@ -417,19 +418,19 @@ namespace repo.Migrations
                 filter: "[NormalizedUserName] IS NOT NULL");
 
             migrationBuilder.CreateIndex(
-                name: "IX_BuyOperations_OrderId",
+                name: "IX_BuyOperations_BuyOrderId",
                 table: "BuyOperations",
-                column: "OrderId");
+                column: "BuyOrderId");
 
             migrationBuilder.CreateIndex(
-                name: "IX_BuyOperations_ProductId",
+                name: "IX_BuyOperations_productId",
                 table: "BuyOperations",
-                column: "ProductId");
+                column: "productId");
 
             migrationBuilder.CreateIndex(
-                name: "IX_BuyOperations_SupplierId",
+                name: "IX_BuyOperations_supplierId",
                 table: "BuyOperations",
-                column: "SupplierId");
+                column: "supplierId");
 
             migrationBuilder.CreateIndex(
                 name: "IX_BuyOrders_SupplierId",

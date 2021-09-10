@@ -222,37 +222,40 @@ namespace repo.Migrations
                         .HasColumnType("int")
                         .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
+                    b.Property<int?>("BuyOrderId")
+                        .HasColumnType("int");
+
                     b.Property<DateTime>("Date")
                         .HasColumnType("datetime2");
 
                     b.Property<string>("Notes")
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<int?>("OrderId")
-                        .HasColumnType("int");
-
                     b.Property<string>("ProductAmout")
                         .HasColumnType("nvarchar(max)");
-
-                    b.Property<int?>("ProductId")
-                        .HasColumnType("int");
 
                     b.Property<string>("ProductPrice")
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<int?>("SupplierId")
-                        .HasColumnType("int");
-
                     b.Property<string>("Total")
                         .HasColumnType("nvarchar(max)");
 
+                    b.Property<int>("orderId")
+                        .HasColumnType("int");
+
+                    b.Property<int>("productId")
+                        .HasColumnType("int");
+
+                    b.Property<int>("supplierId")
+                        .HasColumnType("int");
+
                     b.HasKey("Id");
 
-                    b.HasIndex("OrderId");
+                    b.HasIndex("BuyOrderId");
 
-                    b.HasIndex("ProductId");
+                    b.HasIndex("productId");
 
-                    b.HasIndex("SupplierId");
+                    b.HasIndex("supplierId");
 
                     b.ToTable("BuyOperations");
                 });
@@ -571,19 +574,21 @@ namespace repo.Migrations
 
             modelBuilder.Entity("repo.Entity.BuyOperations", b =>
                 {
-                    b.HasOne("repo.Entity.BuyOrder", "BuyOrder")
+                    b.HasOne("repo.Entity.BuyOrder", null)
                         .WithMany("BuyOperations")
-                        .HasForeignKey("OrderId");
+                        .HasForeignKey("BuyOrderId");
 
                     b.HasOne("repo.Entity.Products", "Products")
                         .WithMany("BuyOperations")
-                        .HasForeignKey("ProductId");
+                        .HasForeignKey("productId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
 
                     b.HasOne("repo.Entity.Suppliers", "Suppliers")
-                        .WithMany("BuyOperations")
-                        .HasForeignKey("SupplierId");
-
-                    b.Navigation("BuyOrder");
+                        .WithMany()
+                        .HasForeignKey("supplierId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
 
                     b.Navigation("Products");
 
@@ -694,8 +699,6 @@ namespace repo.Migrations
 
             modelBuilder.Entity("repo.Entity.Suppliers", b =>
                 {
-                    b.Navigation("BuyOperations");
-
                     b.Navigation("BuyOrders");
                 });
 #pragma warning restore 612, 618

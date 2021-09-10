@@ -69,10 +69,17 @@ namespace repo.Controllers
        [HttpPut]
         public IActionResult Edit(SuppliersVM ob)
         {
-            var data = SupplierRepo.Edit(ob);
-            if (data == null)
-                return BadRequest(new response { Message = "Can Not Edit", Status = "Error" });
-            return Ok(data);
+            if (ModelState.IsValid)
+            {
+                var data = SupplierRepo.Edit(ob);
+                if (data == null)
+                    return BadRequest(new response { Message = "Can Not Edit", Status = "Error" });
+                return Ok(data);
+            }
+            else
+            {
+                return Ok(ModelState.Values);
+            }
         }
         [HttpGet("{id}")]
         public IActionResult GetById(int id)

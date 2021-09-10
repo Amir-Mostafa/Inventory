@@ -13,5 +13,6 @@ namespace repo.interfces
         BuyOperationsVM Delete(int id);
         BuyOperationsVM Edit(BuyOperationsVM ob);
         BuyOperationsVM GetById(int id);
+        IQueryable<BuyOperationsVM> buyOperationsByOrderId(int id);
     }
 }

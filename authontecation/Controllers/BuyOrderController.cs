@@ -84,5 +84,32 @@ namespace repo.Controllers
             return Ok(data);
         }
 
+        [HttpGet("NextOrder/{id}")]
+        public IActionResult NextOrder(int id)
+        {
+            var data = BuyOrderRepo.NextOrder(id);
+            if (data == null)
+                return Ok(new response { Message = "Not Found", Status = "Error" });
+            return Ok(data);
+        }
+
+        [HttpGet("PrevOrder/{id}")]
+        public IActionResult PrevOrder(int id)
+        {
+            var data = BuyOrderRepo.PrevOrder(id);
+            if (data == null)
+                return Ok(new response { Message = "Not Found", Status = "Error" });
+            return Ok(data);
+        }
+
+        [HttpGet("LastOrder")]
+        public IActionResult LastOrder()
+        {
+            var data = BuyOrderRepo.LastOrder();
+            if (data == null)
+                return Ok(new response { Message = "Not Found", Status = "Error" });
+            return Ok(data);
+        }
+
     }
 }

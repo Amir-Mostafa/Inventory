@@ -22,7 +22,7 @@ namespace repo.Entity
 
         public virtual ICollection<BuyOrder>BuyOrders { get; set; }
 
-        public virtual ICollection<BuyOperations> BuyOperations { get; set; }
+        //public virtual ICollection<BuyOperations> BuyOperations { get; set; }
 
 
 

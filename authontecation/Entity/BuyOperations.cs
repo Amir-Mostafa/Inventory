@@ -18,15 +18,19 @@ namespace repo.Entity
         public DateTime Date { get; set; }
         public string Total { get; set; }
         public string Notes { get; set; }
+        public int orderId { get; set; }
 
-        [ForeignKey("OrderId")]
-        public virtual BuyOrder BuyOrder { get; set; }
+        public int supplierId { get; set; }
+        public int productId { get; set; }
+
+        //[ForeignKey("orderId")]
+        //public virtual BuyOrder BuyOrder { get; set; }
 
 
-        [ForeignKey("SupplierId")]
+        [ForeignKey("supplierId")]
         public virtual Suppliers Suppliers { get; set; }
 
-        [ForeignKey("ProductId")]
+        [ForeignKey("productId")]
         public virtual Products Products { get; set; }
 
 

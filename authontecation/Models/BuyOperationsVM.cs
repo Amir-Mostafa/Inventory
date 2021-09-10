@@ -23,5 +23,16 @@ namespace repo.Models
         [DataType(DataType.Currency, ErrorMessage = "Invalid Data")]
         public string Total { get; set; }
         public string Notes { get; set; }
+        [Required(ErrorMessage = "order ID Require")]
+        public int orderId { get; set; }
+        [Required(ErrorMessage = "supplier ID Require")]
+        public int supplierId { get; set; }
+        [Required(ErrorMessage = "product ID Require")]
+        public int productId { get; set; }
+        public string name { get; set; }
+
+
+
+
     }
 }

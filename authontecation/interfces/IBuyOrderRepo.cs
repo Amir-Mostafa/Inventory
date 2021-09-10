@@ -13,5 +13,9 @@ namespace repo.interfces
         BuyOrderVM Delete(int id);
         BuyOrderVM Edit(BuyOrderVM ob);
         BuyOrderVM GetById(int id);
+
+        BuyOrderVM NextOrder(int id);
+        BuyOrderVM PrevOrder(int id);
+        BuyOrderVM LastOrder();
     }
 }

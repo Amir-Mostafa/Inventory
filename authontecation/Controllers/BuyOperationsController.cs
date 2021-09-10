@@ -26,15 +26,15 @@ namespace repo.Controllers
         {
             if (ModelState.IsValid)
             {
-                try
-                {
+                //try
+                //{
                     var c = BuyOperationRepo.Add(BuyOperation);
                     return Ok(c);
-                }
-                catch (Exception ex)
-                {
-                    return BadRequest(ex.Message);
-                }
+                //}
+                //catch (Exception ex)
+                //{
+                //    return BadRequest(ex.Message);
+                //}
 
             }
 
@@ -81,6 +81,14 @@ namespace repo.Controllers
         public IActionResult GetById(int id)
         {
            var data=BuyOperationRepo.GetById(id);
+            if (data == null)
+                return BadRequest(new response { Message = "Not Found", Status = "Error" });
+            return Ok(data);
+        }
+        [HttpGet("OperationsByOrderId/{id}")]
+        public IActionResult OperationsByOrderId(int id)
+        {
+            var data = BuyOperationRepo.buyOperationsByOrderId(id);
             if (data == null)
                 return BadRequest(new response { Message = "Not Found", Status = "Error" });
             return Ok(data);

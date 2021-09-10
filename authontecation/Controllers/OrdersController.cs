@@ -82,31 +82,31 @@ namespace repo.Controllers
                 return Ok(new response { Message = "Not Found", Status = "Error" });
             return Ok(data);
         }
-        [HttpGet("NextOrder/{id}")]
-        public IActionResult NextOrder(int id)
-        {
-            var data = OrderRepo.NextOrder(id);
-            if (data == null)
-                return Ok(new response { Message = "Not Found", Status = "Error" });
-            return Ok(data);
-        }
+            [HttpGet("NextOrder/{id}")]
+            public IActionResult NextOrder(int id)
+            {
+                var data = OrderRepo.NextOrder(id);
+                if (data == null)
+                    return Ok(new response { Message = "Not Found", Status = "Error" });
+                return Ok(data);
+            }
 
-        [HttpGet("PrevOrder/{id}")]
-        public IActionResult PrevOrder(int id)
-        {
-            var data = OrderRepo.PrevOrder(id);
-            if (data == null)
-                return Ok(new response { Message = "Not Found", Status = "Error" });
-            return Ok(data);
-        }
+            [HttpGet("PrevOrder/{id}")]
+            public IActionResult PrevOrder(int id)
+            {
+                var data = OrderRepo.PrevOrder(id);
+                if (data == null)
+                    return Ok(new response { Message = "Not Found", Status = "Error" });
+                return Ok(data);
+            }
 
-        [HttpGet("LastOrder")]
-        public IActionResult LastOrder()
-        {
-            var data = OrderRepo.LastOrder();
-            if (data == null)
-                return Ok(new response { Message = "Not Found", Status = "Error" });
-            return Ok(data);
-        }
+            [HttpGet("LastOrder")]
+            public IActionResult LastOrder()
+            {
+                var data = OrderRepo.LastOrder();
+                if (data == null)
+                    return Ok(new response { Message = "Not Found", Status = "Error" });
+                return Ok(data);
+            }
     }
 }

@@ -73,5 +73,11 @@ namespace repo.Repo
             BuyOperationsVM data = db.BuyOperations.Where(n => n.Id == id).Select(n => new BuyOperationsVM { Id = n.Id, Total = n.Total, ProductAmout = n.ProductAmout, Date = n.Date, ProductPrice = n.ProductPrice, Notes = n.Notes }).FirstOrDefault();
             return data;
         }
+    
+        public IQueryable<BuyOperationsVM> buyOperationsByOrderId(int id)
+        {
+            var data = db.BuyOperations.Where(n => n.orderId == id).Select(n => new BuyOperationsVM {   Id = n.Id, ProductAmout = n.ProductAmout, ProductPrice = n.ProductPrice, Date = n.Date, Notes = n.Notes,Total = n.Total, orderId = n.orderId, productId = n.productId, supplierId=n.supplierId , name=n.Products.Name});
+            return data;
+        }
     }
 }

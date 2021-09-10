@@ -12,7 +12,7 @@ namespace authontecation.Authontecation
     {
         public ApplicationDbContext(DbContextOptions<ApplicationDbContext> options) : base(options)
         {
-
+            
         }
         //public DbSet<Employee> Employees { get; set; }
         //public DbContainer(DbContextOptions<DbContainer> opts) : base(opts) { }
@@ -37,6 +37,7 @@ namespace authontecation.Authontecation
        .HasMany(e => e.Clients)
        .WithOne(e => e.City)
        .OnDelete(DeleteBehavior.NoAction);
+
         }
     }
 }

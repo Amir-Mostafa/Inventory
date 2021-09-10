@@ -27,7 +27,7 @@ namespace repo.Repo
 
             db.BuyOrders.Add(data);
             db.SaveChanges();
-            return ob;
+            return mapper.Map<BuyOrderVM>(data);
         }
 
         public BuyOrderVM Delete(int id)
@@ -75,5 +75,60 @@ namespace repo.Repo
             BuyOrderVM data = db.BuyOrders.Where(n => n.Id == id).Select(n => new BuyOrderVM { Id = n.Id, Total = n.Total, UserName = n.UserName, Date = n.Date, SupplierId = n.SupplierId }).FirstOrDefault();
             return data;
         }
+
+        public BuyOrderVM NextOrder(int id)
+        {
+            int idd = 0;
+            BuyOrder o = db.BuyOrders.OrderByDescending(o => o.Id).FirstOrDefault();
+            if (o != null)
+                idd = o.Id;
+
+            if (id < idd)
+            {
+                id++;
+
+                BuyOrderVM data = db.BuyOrders.Where(n => n.Id == id).Select(n => new BuyOrderVM { Id = n.Id, Date = n.Date, Total = n.Total, UserName = n.UserName,SupplierId=n.SupplierId,SupplierName=n.Suppliers.Name }).FirstOrDefault();
+                while (data == null && id <= idd)
+                {
+                    data = db.BuyOrders.Where(n => n.Id == id).Select(n => new BuyOrderVM { Id = n.Id, Date = n.Date, Total = n.Total, UserName = n.UserName, SupplierId = n.SupplierId, SupplierName = n.Suppliers.Name }).FirstOrDefault();
+                    id++;
+                }
+                return data;
+            }
+            else
+                return null;
+        }
+        public BuyOrderVM PrevOrder(int id)
+        {
+            int idd = 0;
+            BuyOrder o = db.BuyOrders.OrderBy(o => o.Id).FirstOrDefault();
+            if (o != null)
+                idd = o.Id;
+
+            if (id > idd)
+            {
+                id--;
+
+                BuyOrderVM data = db.BuyOrders.Where(n => n.Id == id).Select(n => new BuyOrderVM { Id = n.Id, Date = n.Date, Total = n.Total, UserName = n.UserName, SupplierId = n.SupplierId, SupplierName = n.Suppliers.Name }).FirstOrDefault();
+                while (data == null && id >= idd)
+                {
+                    data = db.BuyOrders.Where(n => n.Id == id).Select(n => new BuyOrderVM { Id = n.Id, Date = n.Date, Total = n.Total, UserName = n.UserName, SupplierId = n.SupplierId, SupplierName = n.Suppliers.Name }).FirstOrDefault();
+                    id--;
+                }
+                return data;
+            }
+            else
+                return null;
+        }
+        public BuyOrderVM LastOrder()
+        {
+            BuyOrder o = db.BuyOrders.OrderByDescending(o => o.Id).FirstOrDefault();
+
+            if (o == null)
+                return null;
+            else
+                return mapper.Map<BuyOrderVM>(o);
+        }
+
     }
 }
