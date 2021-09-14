@@ -83,5 +83,14 @@ namespace repo.Controllers
             return Ok(data);
         }
 
+        [HttpGet("clientOperations/{id}")]
+        public IActionResult clientOperations(int id)
+        {
+            var data = ShokakOperationRepo.clientOperations(id);
+            if (data == null)
+                return Ok(new response { Message = "Not Found", Status = "Error" });
+            return Ok(data);
+        }
+
     }
 }
