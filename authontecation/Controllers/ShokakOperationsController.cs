@@ -83,7 +83,6 @@ namespace repo.Controllers
             return Ok(data);
         }
 
-<<<<<<< HEAD
         [HttpPost("CityReport")]
         public IActionResult CityReport(int id)
         {
@@ -94,8 +93,15 @@ namespace repo.Controllers
         }
 
 
+        [HttpPost("CloseAccount")]
+        public IActionResult CloseAccount(int id)
+        {
+            var data = ShokakOperationRepo.CloseAccount(id);
+            if (data == null)
+                return BadRequest(new response { Message = "Not Found", Status = "Error" });
+            return Ok(data);
+        }
 
-=======
         [HttpGet("clientOperations/{id}")]
         public IActionResult clientOperations(int id)
         {
@@ -105,6 +111,5 @@ namespace repo.Controllers
             return Ok(data);
         }
 
->>>>>>> 992ac6d359ae71ec4a5b0eeffeebfb22340a1803
     }
 }

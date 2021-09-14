@@ -75,7 +75,6 @@ namespace repo.Repo
             return data;
         }
 
-<<<<<<< HEAD
          public List<ShokakOperationVM> CityReportByCityId(int id)
            {
              var data = db.Client.Where(n => n.CityId == id).Select(n => new ClientVM { Id = n.Id, Name = n.Name }).ToList();
@@ -88,7 +87,7 @@ namespace repo.Repo
              foreach(var n in s)
                 {
                     // n.Total=(float.Parse(n.Creditor)-float.Parse(n.Debtor)).ToString();
-                    total += float.Parse(n.Creditor) - float.Parse(n.Debtor);
+                    total += float.Parse(n.Debtor) - float.Parse(n.Creditor);
                 }
                 ShokakOperationVM r = new ShokakOperationVM();
                 r.ClientId = i.Id;
@@ -102,11 +101,40 @@ namespace repo.Repo
            return f;
 
             }
+        public ShokakOperationVM CloseAccount(int id /*client id*/)
+        {
+            var s = db.ShokakOperations.Where(n => n.ClientId == id).Select(n => new ShokakOperationVM { Id = n.Id, Creditor = n.Creditor, Debtor = n.Debtor, Date = n.Date, Notes = n.Notes, OrderId = n.OrderId, ClientId = n.ClientId }).ToList();
+            var total = 0.0;
+            foreach (var n in s)
+            {
+                total += float.Parse(n.Debtor) - float.Parse(n.Creditor);
+            }
+
+            ShokakOperationVM r = new ShokakOperationVM();
+            r.ClientId = id;
+            if (total > 0)
+            {
+                r.Creditor = total.ToString();
+                r.Debtor = "0";
+            }
+            else
+            {
+                r.Creditor = "0";
+                r.Debtor = (Math.Abs(total)).ToString();
+            }
+            r.Date =DateTime.Now;
+            r.Notes = "تصفيه حساب";
+            ShokakOperation data = mapper.Map<ShokakOperation>(r);
+
+            db.ShokakOperations.Add(data);
+            db.SaveChanges();
+            return r;
+
+        }
+        
 
 
-
-=======
-        public List<ShokakOperationVM> clientOperations(int id)
+            public List<ShokakOperationVM> clientOperations(int id)
         {
             List<ShokakOperationVM> data =db.ShokakOperations.Where(n => n.ClientId == id).Select(n => new ShokakOperationVM { Id = n.Id, Creditor = n.Creditor, Debtor = n.Debtor, Date = n.Date, Notes = n.Notes, OrderId = n.OrderId, ClientId = n.ClientId }).ToList();
 
@@ -132,6 +160,5 @@ namespace repo.Repo
 
             return data;
         }
->>>>>>> 992ac6d359ae71ec4a5b0eeffeebfb22340a1803
     }
 }
