@@ -189,12 +189,12 @@ namespace authontecation.Controllers
             }
             return   Ok(new { Message = "valid Token" }); ;
         }
-        [HttpPost("Logout")]
+       /* [HttpPost("Logout")]
         public async Task<ActionResult> Logout()
         {
             
             return Ok();
-        }
+        }*/
 
 
 

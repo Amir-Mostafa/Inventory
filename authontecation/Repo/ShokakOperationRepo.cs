@@ -74,5 +74,35 @@ namespace repo.Repo
             ShokakOperationVM data = db.ShokakOperations.Where(n => n.Id == id).Select(n => new ShokakOperationVM { Id = n.Id, Creditor = n.Creditor, Debtor = n.Debtor, Date = n.Date, Notes = n.Notes, OrderId = n.OrderId, ClientId = n.ClientId }).FirstOrDefault();
             return data;
         }
+
+         public List<ShokakOperationVM> CityReportByCityId(int id)
+           {
+             var data = db.Client.Where(n => n.CityId == id).Select(n => new ClientVM { Id = n.Id, Name = n.Name }).ToList();
+             List<ShokakOperationVM> f=new List<ShokakOperationVM>();
+
+            foreach(var i in data)
+            {
+             var s = db.ShokakOperations.Where(n => n.ClientId ==i.Id).Select(n => new ShokakOperationVM { Id = n.Id, Creditor = n.Creditor, Debtor = n.Debtor, Date = n.Date, Notes = n.Notes, OrderId = n.OrderId, ClientId = n.ClientId }).ToList();
+                var total = 0.0;
+             foreach(var n in s)
+                {
+                    // n.Total=(float.Parse(n.Creditor)-float.Parse(n.Debtor)).ToString();
+                    total += float.Parse(n.Creditor) - float.Parse(n.Debtor);
+                }
+                ShokakOperationVM r = new ShokakOperationVM();
+                r.ClientId = i.Id;
+                r.ClientName = i.Name;
+                r.Total = total.ToString();
+                if (r.Total != "0")
+                {
+                    f.Add((ShokakOperationVM)r);
+                }
+                    }
+           return f;
+
+            }
+
+
+
     }
 }

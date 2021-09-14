@@ -26,6 +26,8 @@ namespace repo.Models
 
         [StringLength(50)]
         public string Notes { get; set; }
+        public string Total { get; set; }
+        public string ClientName { get; set; }
 
         public int ClientId { get; set; }
         public int OrderId { get; set; }

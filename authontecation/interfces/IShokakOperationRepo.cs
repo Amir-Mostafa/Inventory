@@ -13,5 +13,6 @@ namespace repo.interfces
         ShokakOperationVM Delete(int id);
         ShokakOperationVM Edit(ShokakOperationVM ob);
         ShokakOperationVM GetById(int id);
+        List<ShokakOperationVM> CityReportByCityId(int id);
     }
 }

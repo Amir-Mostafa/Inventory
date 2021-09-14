@@ -40,7 +40,7 @@ namespace repo.Repo
                 return data;           
 
 
-                return mapper.Map<ClientVM>(d);
+                //return mapper.Map<ClientVM>(d);
 
             }
             catch
