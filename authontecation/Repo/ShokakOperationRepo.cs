@@ -75,6 +75,7 @@ namespace repo.Repo
             return data;
         }
 
+<<<<<<< HEAD
          public List<ShokakOperationVM> CityReportByCityId(int id)
            {
              var data = db.Client.Where(n => n.CityId == id).Select(n => new ClientVM { Id = n.Id, Name = n.Name }).ToList();
@@ -104,5 +105,33 @@ namespace repo.Repo
 
 
 
+=======
+        public List<ShokakOperationVM> clientOperations(int id)
+        {
+            List<ShokakOperationVM> data =db.ShokakOperations.Where(n => n.ClientId == id).Select(n => new ShokakOperationVM { Id = n.Id, Creditor = n.Creditor, Debtor = n.Debtor, Date = n.Date, Notes = n.Notes, OrderId = n.OrderId, ClientId = n.ClientId }).ToList();
+
+            double totalCreit = 0;
+            double totalDebtor = 0;
+            for (int i=0;i<data.Count;i++)
+            {
+                if (i == 0)
+                    data[i].total =(double.Parse(data[i].Debtor) - double.Parse(data[i].Creditor)).ToString();
+
+                else
+                {
+                    data[i].total = (double.Parse(data[i].Debtor) - double.Parse(data[i].Creditor)+ double.Parse(data[i - 1].total)).ToString();
+                }
+                totalCreit += double.Parse(data[i].Creditor);
+                totalDebtor += double.Parse(data[i].Debtor);
+            }
+            if (data.Count > 0)
+            {
+                data[data.Count - 1].totalCreditor = totalCreit.ToString();
+                data[data.Count - 1].totalDebtor = totalDebtor.ToString();
+            }
+
+            return data;
+        }
+>>>>>>> 992ac6d359ae71ec4a5b0eeffeebfb22340a1803
     }
 }

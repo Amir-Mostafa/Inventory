@@ -90,7 +90,7 @@ namespace repo.Controllers
         }
 
         
-        [HttpGet("{name}")]
+        [HttpGet("search/{name}")]
         public IActionResult Search(string name)
         {
             var data=ClientRepo.Search(name);

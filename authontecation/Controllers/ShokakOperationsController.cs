@@ -83,6 +83,7 @@ namespace repo.Controllers
             return Ok(data);
         }
 
+<<<<<<< HEAD
         [HttpPost("CityReport")]
         public IActionResult CityReport(int id)
         {
@@ -94,5 +95,16 @@ namespace repo.Controllers
 
 
 
+=======
+        [HttpGet("clientOperations/{id}")]
+        public IActionResult clientOperations(int id)
+        {
+            var data = ShokakOperationRepo.clientOperations(id);
+            if (data == null)
+                return Ok(new response { Message = "Not Found", Status = "Error" });
+            return Ok(data);
+        }
+
+>>>>>>> 992ac6d359ae71ec4a5b0eeffeebfb22340a1803
     }
 }
