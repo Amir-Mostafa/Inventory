@@ -153,7 +153,6 @@ namespace authontecation
             app.UseAuthorization();
 
             
-            
 
             app.UseEndpoints(endpoints =>
             {

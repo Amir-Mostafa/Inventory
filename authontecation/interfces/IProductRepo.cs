@@ -14,5 +14,6 @@ namespace repo.interfces
         ProductsVM Edit(ProductsVM ob);
         ProductsVM GetById(int id);
         IQueryable<ProductsVM> Search(string name);
+
     }
 }
